@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 
-const socket = io("https://test-seven-psi-40.vercel.app");
+const socket = io("http://localhost:5173", { transports: ['websocket'] });
 
 function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     socket.on("message", (data) => {
+      console.log(data)
       setMessage(data);
     });
   }, []);
 
   const sendMessage = () => {
+    console.log("66666")
     socket.emit("message", "Hello from the client!");
   };
 
